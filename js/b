@@ -1,0 +1,167 @@
+
+/* 小螢幕改成直列 */
+@media (max-width: 720px) {
+  body{
+    overflow:auto;
+  }
+  .group-container {
+    grid-template-columns: 1fr; /* 一列一欄 */
+  }
+  .page1{
+    height: auto;
+  }
+  .page2{
+    height: auto;
+  }
+  .group-card {
+    width: auto;
+    height: auto;
+  }
+  .group-title{
+    font-size: 2rem;
+  }
+  .group-info {
+    font-size: 1rem;
+  }
+  .icon img{
+    height: 30px;
+  }
+  #currentCall {
+    padding: 1vw 1vh;
+    font-size: clamp(30px, 4vh, 4rem);
+    padding: 1vh 1vw; 
+    width: 60vw;
+    margin-top: 0;
+  }
+  button.confirm-button {
+    width: 100%;
+    height: auto;
+  }
+  .storelogo{
+    height: auto;
+    width: 40%;
+  }
+  .modal{
+    width: 100%;
+    height: 50vh;
+  }
+  .pStore{
+    font-size: 2rem;
+  }
+ .pSection{
+    font-size: 1.8rem;
+  }
+  .pNumber{
+    font-size: 10rem;
+  }
+  .modal-box-info{
+    font-size: 1.4rem;
+  }
+  .modal-box-icon img{
+    height: 30px;
+  }
+
+  .resp { flex-direction: column; }
+  .resp .left, .resp .right { width: 100%; flex: none; }
+} 
+
+/* 響應式縮小字體 */
+@media (max-width: 480px){
+  :root{ --circle-size: 64px; --overlap: -18px; }
+  .badge .text{ font-size: 18px; letter-spacing: 1px; }
+  .resp{
+    padding: 1vh;
+    gap: 1vh;
+  }
+  .group-title{
+    font-size: 1.5rem;
+  }
+  .group-info {
+    font-size: 0.8rem;
+  }
+  .icon img{
+    height: 25px;
+  }  
+  .group-card {
+    width: auto;
+    height: auto;
+  }
+  .page1{
+    padding: 0;
+  }
+  #currentCall {
+    padding: 0;
+    font-size: 25px;
+    /* padding: 1vh 1vw; */
+    width: 35vw;
+    margin-top: 0;
+  }
+  .currentDisp p{
+    font-size: 0.8rem;
+  }
+  .qrcode-title {
+    font-size: 1rem;
+  }
+  .qrcode-title2 {
+    font-size: 0.8rem;
+  }
+  .arrow-label{
+    padding: 2vh 2vh;
+  }
+  #ver{
+    margin-top: -1vh;
+  }
+  .storelogo{
+    height: auto;
+    width: 35%;
+  }
+  }
+   /* 橫版設計 */
+  @media (max-height: 450px) and (orientation: landscape){
+    :root{ --circle-size: 60px; --overlap: -15px; }
+    .badge .text{ font-size: 18px; letter-spacing: 1px; }
+    .resp{
+      padding: 1vh;
+      gap: 1vh;
+    } 
+    .resp .left, .resp .right { flex: 0 0 16vw; }
+    .group-container {
+      grid-template-columns: repeat(2, 1fr); /* 固定二欄 */
+    }  
+    .qrcode-title {
+      font-size: 1rem;
+    }
+    .qrcode-title2 {
+      font-size: 0.8rem;
+    } 
+    .qrcode-container {
+      margin: 10px 0 0 0;
+    }
+    .page1{
+      padding: 0;
+      height: auto;
+      gap: 0;
+    }    
+    #ver{
+      margin-top: -2vh;
+    }    
+    .modal{
+      width: 100%;
+      height: 50vh;
+    }
+    .pStore{
+      font-size: 2rem;
+    }
+    .pSection{
+      font-size: 1.8rem;
+    }
+    .pNumber{
+      font-size: 10rem;
+    }
+    .modal-box-info{
+      font-size: 1.4rem;
+    }
+    .modal-box-icon img{
+      height: 30px;
+    }    
+  }
