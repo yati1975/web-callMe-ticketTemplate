@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="version" content="1.0.2">
+<meta name="version" content="1.0.3">
 <script src="./js/qrcode.min.js"></script>
 <script src="./js/crypto-js.min.js"></script>
 <script src="./js/localforage.min.js"></script>
@@ -1083,6 +1083,8 @@ button.home-button:hover img {
       }else{
           document.getElementById("storeTitle").innerText = storename;
       }      
+
+      generateQRCode();
   }
   function showNowNumber(){
       let paddedNumber = String(nowValue).padStart(3,"0");
