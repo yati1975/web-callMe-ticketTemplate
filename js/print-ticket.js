@@ -21,7 +21,13 @@ function printTicket(storename,callername,nowGetNumItemTitle,nowUserGetNumValue,
     nurl = url + encodeURI(storename) + "&caller_name=" + encodeURI(callername);
   }
 
-  const qrurl = (typeof CONFIG !== "undefined" && CONFIG.QRCODEURL) ? CONFIG.QRCODEURL : nurl;
+  
+  //const qrurl = (typeof CONFIG !== "undefined" && CONFIG.QRCODEURL) ? CONFIG.QRCODEURL : nurl;
+
+  let printTicketDef = getConfig(username);
+  let printTicketConf = printTicketDef.conf;
+  let printTicketDoc = printTicketDef.content;
+  const qrurl = (typeof printTicketConf !== "undefined" && printTicketConf.QRCODEURL) ? printTicketConf.QRCODEURL : nurl;
 
 
   // 目前取號項目名稱
@@ -67,7 +73,8 @@ function printTicket(storename,callername,nowGetNumItemTitle,nowUserGetNumValue,
   }, 
   ...breakLines(breaksymbol,sizes.space),
   {
-    text: "您的號碼",
+    // text: "您的號碼",
+    text: printTicketDoc.subtitle,
     align: "center",
     size: sizes.subtitle
   },
@@ -85,13 +92,14 @@ function printTicket(storename,callername,nowGetNumItemTitle,nowUserGetNumValue,
   },
   ...breakLines(breaksymbol,sizes.space),
   {
-    text: "請掃描下方QRCODE,可預先點餐",
+    // text: "請掃描下方QRCODE,可預先點餐",
+    text: printTicketDoc.notice,
     align: "center",
     size: sizes.tip
   },
   ...breakLines(breaksymbol,sizes.space)
   ];
-  //console.log(JSON.stringify(content));
+  console.log(JSON.stringify(content));
 
   
   fetch("https://127.0.0.1/print", {    

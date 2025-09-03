@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="version" content="1.0.3">
+<meta name="version" content="1.0.4">
 <script src="./js/qrcode.min.js"></script>
 <script src="./js/crypto-js.min.js"></script>
 <script src="./js/localforage.min.js"></script>
 <script src="./WebSocket_lower.js"></script>  
 <!-- print-ticket 增加 -->
- <script src="./js/print-config.js"></script>
+<script src="./js/print-config-list.js"></script>
 <script src="./js/print-ticket.js"></script>
 
 
@@ -1014,11 +1014,19 @@ button.home-button:hover img {
   }  
   userID = generateUserId();  //產生玩家ID.
 
-    //print-ticket 增加這三行
-  let print = urlParams.get("print") || CONFIG.PRINT; // print=1 呼叫 local print server,print=0 不列印
-  let spacing = urlParams.get("spacing") || CONFIG.SPACING; // 每行文字跟下一行中的斷行行高
-  let paper = urlParams.get("paper") || CONFIG.PAPER; // 印表機紙張是 58mm或80mm
-  let breaksymbol = urlParams.get("breaksymbol") || CONFIG.BREAKSYMBOL; 
+  //print-ticket 增加這三行
+  // let print = urlParams.get("print") || CONFIG.PRINT; // print=1 呼叫 local print server,print=0 不列印
+  // let spacing = urlParams.get("spacing") || CONFIG.SPACING; // 每行文字跟下一行中的斷行行高
+  // let paper = urlParams.get("paper") || CONFIG.PAPER; // 印表機紙張是 58mm或80mm
+  // let breaksymbol = urlParams.get("breaksymbol") || CONFIG.BREAKSYMBOL; 
+
+  let printTicketDef = getConfig(username);
+  let printTicketConf = printTicketDef.conf;
+  let printTicketDoc = printTicketDef.content;
+  let print = urlParams.get("print") || printTicketConf.PRINT; // print=1 呼叫 local print server,print=0 不列印
+  let spacing = urlParams.get("spacing") || printTicketConf.SPACING; // 每行文字跟下一行中的斷行行高
+  let paper = urlParams.get("paper") || printTicketConf.PAPER; // 印表機紙張是 58mm或80mm
+  let breaksymbol = urlParams.get("breaksymbol") || printTicketConf.BREAKSYMBOL; 
 
 
   const versionMeta = document.querySelector('meta[name="version"]');
