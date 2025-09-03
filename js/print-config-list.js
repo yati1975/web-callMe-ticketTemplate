@@ -81,6 +81,7 @@ function getConfig(callername){
   }
   let conf = CONFIG[username];
   if(!conf){
+    conf={};
     conf.conf = defCONFIG;
     conf.content = defCONTENT;
   }
