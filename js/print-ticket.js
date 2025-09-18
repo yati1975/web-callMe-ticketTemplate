@@ -14,11 +14,11 @@ function printTicket(storename,callername,nowGetNumItemTitle,nowUserGetNumValue,
   if (callername !== null) {
     title = storename + ' [' + callername + ']';
   }
-  let url = "https://liff.line.me/2003918297-NKaR4P9w/?shop_name=";
-  let nurl = url + encodeURI(storename);
+  let url = `https://${env.liffDomain}/${env.liffId}/?shop_name=`;
+  let nurl = url + encodeURI(storename) + "&user_num=" + encodeURI(nowUserGetNumValue);
   // 進行 URL 編碼（中文等特殊字元會被轉為百分比編碼）
   if (callername !== null) {
-    nurl = url + encodeURI(storename) + "&caller_name=" + encodeURI(callername);
+    nurl = url + encodeURI(storename) + "&caller_name=" + encodeURI(callername) + "&user_num=" + encodeURI(nowUserGetNumValue);
   }
 
   
@@ -28,6 +28,7 @@ function printTicket(storename,callername,nowGetNumItemTitle,nowUserGetNumValue,
   let printTicketConf = printTicketDef.conf;
   let printTicketDoc = printTicketDef.content;
   const qrurl = (typeof printTicketConf !== "undefined" && printTicketConf.QRCODEURL) ? printTicketConf.QRCODEURL : nurl;
+  //console.log(qrurl);
 
 
   // 目前取號項目名稱

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="version" content="1.0.4">
+<meta name="version" content="1.0.7">
 <script src="./js/qrcode.min.js"></script>
 <script src="./js/crypto-js.min.js"></script>
 <script src="./js/localforage.min.js"></script>
@@ -225,11 +225,13 @@
   /* 背景 SVG */
   .header-bg {
     position: absolute;
-    top: 11vh;
-    left: 50%;
-    width: 68%;
-    height: 100%;
-    transform: translate(-50%, -50%);
+    /* top: 11vh; */
+    /* left: 50%; */
+    /* width: 68%; */
+    /* height: 100%; */
+    /* transform: translate(-50%, -50%); */
+    transform-origin: top center;
+    transform: scale(0.68);
     z-index: 0;
   }
 
@@ -258,6 +260,12 @@
 .arrow-label.disabled {
     cursor: not-allowed;
     pointer-events: none;
+}
+.logoGroup{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
 .currentDisp{
   display: flex;
@@ -355,11 +363,13 @@ button.confirm-button {
   /*height: auto;*/
   /*margin-left: auto;*/
   color: white;
-  font-size: 2.5rem;
+  font-size: clamp(5vh,2.5rem,6.5vw);
   /* padding: 20px 20px; */
   line-height: 1.4;
-  width:160px;
-  height: 160px;
+  min-width: 16vw;
+  min-height: 16vw;
+  max-width: 160px;
+  max-height: 160px;
   margin: 0px 10px 8vh;
 }
 
@@ -499,22 +509,28 @@ button.home-button:hover img {
   height: 40vh;
   margin: 5vh 0;
 }
+.group-card.three {
+  margin: 0;
+}
 .group-card.five {
-  width: 19vw;
+  width: 18vw;
 }
 .group-card.one .group-title {
-    font-size: 6.5rem;
+    font-size: clamp(3.5rem,10vw,6.5rem);
     margin-bottom: 25px;
     height: 75%;
     align-items: center;
     margin-top: -10px;
 }
 .group-card.two .group-title {
-    font-size: 6.5rem;
+    font-size: clamp(3.5rem,9vw,6.5rem);
     margin-bottom: 25px;
     height: 75%;
     align-items: center;
     margin-top: -10px;
+}
+.group-card.three .group-title {
+  font-size: 5.5rem;
 }
 .group-card.five .group-title {
   font-size: 3.5rem;
@@ -634,9 +650,7 @@ button.home-button:hover img {
   font-weight: bold;
   margin: 1vw;
 }
-.hidden{
-  display: none;
-}
+
 .footer {
     /* margin-left: -56px; */
     /* max-width: 600px; */
@@ -649,9 +663,41 @@ button.home-button:hover img {
     flex-wrap: nowrap;
     /*width: 100vw;*/
 }
+
 #ver{
-    font-size: 0.8rem;
+    font-size: clamp(0.8rem, 1.5vh, 2vw);
 }
+
+/* HTML: <div class="loader"></div> */
+.loadingdisp{
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  z-index: 999;
+}
+.loader {
+  width: calc(6*30px);
+  height: 50px;
+  display: flex;
+  color: #fefefe;
+  filter: drop-shadow(30px 25px 0 currentColor) drop-shadow(60px 0 0 currentColor) drop-shadow(120px 0 0 currentColor);
+  clip-path: inset(0 100% 0 0);
+  animation: l13 2s infinite steps(7);
+  margin: 10px;
+}
+.loader:before {
+  content: "";
+  width: 30px;
+  height: 25px;
+  background: 
+    radial-gradient(farthest-side at right,currentColor 92%,#0000) left/20px 100% no-repeat,
+    radial-gradient(farthest-side,         currentColor 92%,#0000) right/17px 9px repeat-y;
+}
+@keyframes l13 {
+  100% {clip-path: inset(0 -30px 0 0)}
+}
+
+
 .resp { display:flex; gap:12px; padding:12px;   z-index: 1;}
 /* .resp > * { padding:10px; background:#fff; border:1px solid #ddd; } */
 .resp > * { /*padding:10px;*/ background:transparent;}
@@ -677,6 +723,10 @@ button.home-button:hover img {
     align-items: center;
 }
 
+.hidden{
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .page2{
     height: auto;
@@ -694,11 +744,22 @@ button.home-button:hover img {
   .icon img{
     height: 30px;
   }  
+  .group-card.three {
+      margin: 1vh 0;
+      width: 40%;
+  }  
+  button.confirm-button {
+    min-width: 14vw;
+    min-height: 14vw;
+  }
 }
    /* 橫版設計 */
   @media (max-height: 450px) and (orientation: landscape){
     /* :root{ --circle-size: 60px; --overlap: -15px; } */
-    .badge .text{ font-size: 18px; letter-spacing: 1px; } 
+    :root{
+      --circle-size: clamp(62px, 10vw, 18vh);
+    }    
+    .badge .text{ font-size: 3vw; letter-spacing: 1px; } 
     .resp{
       padding: 1vh;
       gap: 1vh;
@@ -727,12 +788,17 @@ button.home-button:hover img {
       padding: 0;
       height: auto;
       gap: 0;
-    }    
+    }  
+    .page2{
+      padding: 0;
+      height: auto;
+      gap: 0;
+    }       
     #ver{
-      margin-top: -2vh;
+      margin-top: 0vh;
     }    
     .modal{
-      width: 100%;
+      /* width: 100%; */
       height: 50vh;
     }
     .pStore{
@@ -749,7 +815,51 @@ button.home-button:hover img {
     }
     .modal-box-icon img{
       height: 30px;
-    }     
+    } 
+    .group-container{
+      margin-top: 0px;
+    }  
+    .group-card.one {
+      margin: 3vh 0;
+    }
+    .group-card.two {
+      margin: 3vh 0;
+    }    
+    .group-card.three {
+      width: 24vw;
+      height: auto;
+      margin: 0;
+    }    
+    .group-card.three .group-title {
+      font-size: clamp(4vh, 5vw, 3.5rem);
+    }    
+    .group-card.five {
+      width: 16vw;
+      min-width: unset;
+    }    
+    .group-card.five .group-title {
+      font-size: clamp(4vh, 5vw, 3.5rem);
+    }
+    .group-info {
+      font-size: clamp(2vw,12px, 1.8rem);
+    }
+    .arrow-label {
+      padding: 2vw 2vh;
+      font-size: 2.5vw;
+    }  
+    .refresh{
+       margin: 2vh 0 2vh 0;
+       font-size: clamp(2.5vw,20px, 1.8rem);
+    }   
+    button.confirm-button {    
+      font-size: clamp(5vh,2rem,6.5vw);
+      min-width: 14vw;
+      min-height: 14vw;
+    }
+    .footer img{
+      transform: scale(0.75);
+      transform-origin: center center;
+    }        
   }
    /* 橫版設計 */
   @media (max-height: 360px) and (orientation: landscape){
@@ -788,17 +898,19 @@ button.home-button:hover img {
       margin-top: -2vh;
     }    
     .modal{
-      width: 100%;
-      height: 50vh;
+      width: 60%;
+      height: 60%;
+      min-width: 50vh;
     }
     .pStore{
-      font-size: 2rem;
+      font-size: clamp(6vw,28px,2rem);
+      margin:3vh;
     }
     .pSection{
-      font-size: 1.8rem;
+      font-size: clamp(5.5vw,24px,1.8rem);
     }
     .pNumber{
-      font-size: 10rem;
+      font-size: clamp(20vw,104px,10rem);
     }
     .modal-box-info{
       font-size: 1.4rem;
@@ -811,9 +923,395 @@ button.home-button:hover img {
       padding: 10px 16px;
       width: 80%;
     }
-    
+    .group-container{
+      margin-top: 0px;
+    }
+    button.confirm-button {
+      min-width: 14vw;
+      min-height: 14vw;
+    }
+    .group-card.two {
+      margin: 0;
+    }
+    .group-card.three {
+      width: 24vw;
+      height: auto;
+      min-height: unset;
+      margin: 0vh 0;
+    }    
+    .group-card.three .group-title {
+      font-size: clamp(4vh, 4vw, 3.5rem);
+    }   
+    .refresh{
+      margin: 0;
+    }      
+    .footer img{
+      transform: scale(0.8);
+      transform-origin: bottom center;
+    }
+  }
+   /* 橫版設計 */
+  @media (max-height: 250px) and (orientation: landscape){
+    /* :root{ --circle-size: 50px; --overlap: -15px; }*/
+    .badge .text{ font-size: 18px; letter-spacing: 1px; } 
+    .resp{
+      padding: 1vh;
+      gap: 1vh;
+    } 
+    .qrcode-title {
+      font-size: 0.85rem;
+    }
+    .qrcode-title2 {
+      font-size: 0.75rem;
+    } 
+    .qrcode-container {
+      margin: 1vh 0 0 0;
+    }
+    .qrcode-bg{
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 16px;
+      border: 8px solid white;
+      margin: 2vh auto;
+    }   
+    #about-qrcode {
+      max-width: 180px;
+      max-height: 180px;
+    }     
+    .page1{
+      padding: 0;
+      height: auto;
+      gap: 0;
+    }    
+    #ver{
+      margin-top: -2vh;
+    }    
+    .modal{
+      width: 60%;
+      height: 60%;
+      min-width: 50vh;
+    }
+    .pStore{
+      font-size: clamp(6vw,28px,2rem);
+      margin:3vh;
+    }
+    .pSection{
+      font-size: clamp(5.5vw,24px,1.8rem);
+    }
+    .pNumber{
+      font-size: clamp(20vw,104px,10rem);
+    }
+    .modal-box-info{
+      font-size: 1.4rem;
+    }
+    .modal-box-icon img{
+      height: 30px;
+    } 
+    .arrow-label {
+      font-size: 16px;
+      padding: 10px 16px;
+      width: 80%;
+    }
+    .group-container{
+      margin-top: 0px;
+    }
+    .group-card {
+      padding: 4px 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .group-title {
+        font-size: 1.25rem;
+        margin-bottom: 5px;
+        height: 60%;
+    }
+
+    .group-info {
+        font-size: 0.85rem;
+    }
+
+    button.confirm-button {
+      min-width: 14vw;
+      min-height: 14vw;
+    }
+    .group-card.one {
+      height: 50vh;
+    }
+    .group-card.one .group-title {
+      font-size: 20vh;
+      margin-bottom: 10px;
+      height: 75%;
+      margin-top: -10px;
+    }  
+    .group-card.two {
+      margin: 8px;
+      height: 50vh;      
+    }
+    .group-card.two .group-title {
+      font-size: 20vh;
+      margin-bottom: 10px;
+      height: 75%;
+      margin-top: -10px;
+    }    
+    .group-card.three {
+      width: 24vw;
+      height: auto;
+      min-height: unset;
+      margin: 0vh 0;
+    }    
+    .group-card.three .group-title {
+      font-size: clamp(4vh, 4vw, 3.5rem);
+    }   
+    .group-container.five{
+      gap: 2vh;
+    }
+    .group-card.five {
+       width: 18vw;
+    }
+    .group-card.five .group-title {
+      font-size: 1.5rem;
+    }    
+    .refresh{
+      margin: 0;
+      font-size: 16px;
+    }      
+    .footer img{
+      transform: scale(0.8);
+      transform-origin: bottom center;
+    }
+  }  
+   /* 橫版設計 */
+  @media (max-width: 520px) and (orientation: landscape){
+    .group-card.two {
+      margin: 3vh 0;
+      min-width: 120px;
+    }
+    .group-card.two .group-title {
+      font-size: clamp(2.5rem, 9vw, 6.5rem);
+    }
+    .group-card {
+      margin: 3vh 0;
+      min-width: 120px;
+    }
+    button.confirm-button {
+      min-width: 16vw;
+      min-height: 16vw;
+    }   
+    .group-card.five{
+      width: 15vw;
+      margin: 1vh 0;
+      min-width: unset;
+    }
   }
 
+  @media (orientation: portrait){
+    .resp { display:flex; gap:1vh; padding:12px;   z-index: 1; flex-direction: column;}
+    .resp > * { /*padding:10px;*/ background:transparent;}
+    .resp .left, .resp .right { flex: 1; }     
+    /* .resp .left, .resp .right { flex: 0 0 15vh; } */
+    .resp .center { 
+      flex:1; 
+      min-width:0; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+    }
+    .header-bg {
+        position: absolute;
+        top: unset;
+        left: unset;
+        width: auto;
+        height: auto;
+        transform: unset;
+        transform: scale(0.8);
+        transform-origin: top right;
+    }    
+    .resp .left {
+      display: flex;
+      flex-direction: row;
+    }
+    .resp .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .logoGroup{
+      align-items: flex-start;  
+      flex: 3 1 0%;
+    }    
+    .storelogo{
+      width: 100%; 
+      height: auto;
+    }
+    .currentDisp{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;    
+    }
+    .currentDisp p{
+      color: white;
+      font-size: clamp(1.5vh, 25px, 5vw);/*7vw;*/
+      width: 20vw;
+      margin: 0;
+      text-align: center;
+    }
+    #currentCall {
+      padding: 0.5vh 1vw; 
+      font-size: clamp(2vh, 35px, 7vw);/*7vw;*/
+      width: 20vw;
+    }  
+      /* 文字在最上層 */
+    .badge {
+      flex: 7 1 0%;
+    }      
+    .badge .text {
+      font-size: 8vw;
+      margin: auto;
+    } 
+    .qrcode-title {
+      font-size: clamp(3.5vh, 25px, 7vw);
+      
+    }
+    .qrcode-title2 {
+      font-size: clamp(2.5vh, 18px, 5vw);
+    }    
+    .arrow-label {
+      width: 75%;
+      font-size:clamp(2.5vh, 18px, 5vw);
+    }
+    .page1{
+      padding: 0;
+      height: auto; 
+      min-height: 50vh;
+      max-height: 60vh;
+    }
+    .group-container{
+      gap: 2vw;
+      margin-top: 0;
+    }
+    .group-card{
+      padding: 10px 5px;
+      min-width: clamp(35vw, 40vw, 150px);
+      width: 42vw;
+      height: 14vh;
+    }
+    .group-title {
+      font-size: clamp(9vw, 4.5rem, 10vw);
+    }
+    .group-info {
+      font-size: clamp(4vw, 30px, 5vw);
+    }
+    .group-container.five{
+      gap: 2vw;
+      margin-top: 0;
+    }
+    .group-card.one{
+      width: 80vw;
+      margin: 0;
+    }   
+    .group-card.one .group-title {
+      font-size: clamp(2.5rem, 10vw, 6.5rem);
+    }    
+    .group-card.two{
+      margin: 0;
+    }  
+    .group-card.two .group-title {
+      font-size: clamp(2.5rem, 10vw, 6.5rem);
+    } 
+    .group-card.three{
+      padding: 10px 5px;
+      margin: 2vh 0;
+      /* min-width: clamp(35vw, 40vw, 150px); */
+      width: 42vw;
+      height: 14vh;
+    }
+    .group-card.three .group-title {
+      font-size: clamp(2.5rem, 10vw, 6.5rem);
+    }        
+    .group-card.five{
+      padding: 10px 5px;
+      min-width: clamp(35vw, 40vw, 150px);
+      width: 42vw;
+      height: 14vh;
+    }
+    .group-card.five .group-title {
+      font-size: clamp(2.5rem, 10vw, 6.5rem);
+    }
+    button.confirm-button {
+      font-size: 6.5vw;
+      width: 90vw;
+      height: 10vh;
+      margin: 2vh 10px 2vh;
+    }
+    .refresh {
+      margin: 0.5vh 0 0 0;
+      font-size: clamp(1.5rem, 3vh, 6vw);
+   }
+   .modal {
+    width: 90vw;
+    height: 50vh;
+   }
+   .pStore{
+    font-size: 12vw;
+   }
+   .pSection{
+    font-size: 10vw;
+   }  
+   .pNumber{
+    font-size: 45vw;
+   } 
+  }
+  @media (max-height: 568px) and (orientation: portrait){
+    .resp { 
+      gap: 0.5vh;
+      padding: 0 12px;
+    }
+    .currentDisp p{
+      font-size: 2.2vh;
+    }
+    #currentCall {
+      padding: 0 1vw; 
+      font-size: 3vh;
+    }  
+    .qrcode-title {
+      font-size: 4vh;
+      
+    }
+    .qrcode-title2 {
+      font-size: 3vh;
+    }         
+    .arrow-label {
+      padding: 10px 20px;
+    }
+    .footer img{
+      transform: scale(0.8);
+      transform-origin: bottom center;
+    }
+    .group-container{
+      margin: 0;
+    }
+    .refresh{
+      font-size: 4vh;
+    }
+    .group-card.three .group-title {
+        font-size: clamp(2.2rem, 10vw, 6.5rem);
+    }    
+    .group-card.five .group-title {
+        font-size: clamp(2.2rem, 10vw, 6.5rem);
+    }    
+    .group-info {
+      font-size: clamp(4vw, 16px, 4.5vw);
+    }   
+    button.confirm-button{
+      font-size: 6vh;
+      width: 30vw;
+      height: 10vh;
+      margin: 1vh;
+    }
+  } 
 
 </style>
 </head>
@@ -860,41 +1358,46 @@ button.home-button:hover img {
     <!-- 背景 SVG -->
     <img src="./images/bgSVG.svg" alt="背景" class="header-bg">
 
-<div class="resp">
-  <div class="left">
-    <div class="storelogo">
-      <img src="./images/titlelogo.png" style="" >
-    </div>
-    
-    <div class="currentDisp">
-      <div id="currentCall">000</div>
-      <p>目前叫號</p> 
-    </div>
-  </div>
-  <div class="center">
-    <div class="badge" aria-hidden="false">
-        <div class="text" id="storeTitle"> </div>
-    </div>
-    <div class = "page1">
-      <div class = "qrcode-container" id="qrcodePage">
-        <div class="qrcode-title">線上候位QR Code</div>
-        <div class="qrcode-bg">
-          <div id="about-qrcode"></div>
+  <div class="resp">
+    <div class="left">
+      <div class = "logoGroup">
+        <div class="storelogo">
+          <img src="./images/titlelogo.png" style="" >
         </div>
-        <div class="qrcode-title2">到號通知</div>
-      </div> 
+        <div class="currentDisp">
+          <div id="currentCall">000</div>
+          <p>目前叫號</p> 
+        </div>
+      </div>
+      <div class="badge hidden" aria-hidden="false" id="portraitHead">
+          <div class="text" id="storeTitleP"></div>
+      </div>
     </div>
-    <div class = "page2">
-    <div class="group-container" id="groupContainer">
+    <div class="center">
+      <div class="badge" aria-hidden="false" id="landscapeHead">
+          <div class="text" id="storeTitle"> </div>
+      </div>      
+      <div class = "page1 hidden">
+        <div class = "qrcode-container" id="qrcodePage">
+          <div class="qrcode-title">線上候位QR Code</div>
+          <div class="qrcode-bg">
+            <div id="about-qrcode"></div>
+          </div>
+          <div class="qrcode-title2">到號通知</div>
+        </div> 
+      </div>
+      <div class = "page2 hidden">
+      <div class="group-container" id="groupContainer">
+      </div>
+      <p class="refresh hidden">過號請重新取號</p>  
+      </div>
     </div>
-    <p class="refresh hidden">過號請重新取號</p>  
+    <div class="right">
+    <div class="arrow-label hidden" onclick="goTakeTicketPage()" id="ticketPageButton" >現場取號</div> 
+    <button class="confirm-button disabled hidden" id="btnConfirm" onclick="doTakeTicket()">確定</button>
     </div>
   </div>
-  <div class="right">
-  <div class="arrow-label" onclick="goTakeTicketPage()" id="ticketPageButton" >現場取號</div> 
-  <button class="confirm-button disabled hidden" id="btnConfirm" onclick="doTakeTicket()">確定</button>
-  </div>
-</div>
+
 
 <!-- 備註 -->
 <div class="footer">
@@ -902,6 +1405,10 @@ button.home-button:hover img {
   <div id="ver">ver.0.0.1</div>
 </div>
 </div>
+<div class="loadingdisp" id="loading">
+  <div class="loader"></div>
+</div>
+
 <!-- 浮動視窗與背景遮罩 -->
 <div class="overlay2" id="modalOverlay" onclick="closeModal()">
   <div class="modal">
@@ -923,6 +1430,7 @@ button.home-button:hover img {
     </div>
   </div>
 </div>  
+
 <script>
   let storename = "";
   let callername = null;
@@ -1007,11 +1515,16 @@ button.home-button:hover img {
   let logourl = null;
   let urlParams = new URLSearchParams(window.location.search);
   let username = urlParams.get("username"); // 若無則給預設值
+  let bQrcode = urlParams.get("qrpage"); // 若無則給預設值
   console.log(username);
   if(username){
       clientId = username.toLocaleLowerCase();
       logourl = "https://storage.googleapis.com/callmeback-web/dispencer/images/"+username+"-logo.png";
   }  
+  let bShowPage1 = true;
+  if(bQrcode!==undefined && bQrcode === "0"){
+    bShowPage1= false;
+  }
   userID = generateUserId();  //產生玩家ID.
 
   //print-ticket 增加這三行
@@ -1027,7 +1540,7 @@ button.home-button:hover img {
   let spacing = urlParams.get("spacing") || printTicketConf.SPACING; // 每行文字跟下一行中的斷行行高
   let paper = urlParams.get("paper") || printTicketConf.PAPER; // 印表機紙張是 58mm或80mm
   let breaksymbol = urlParams.get("breaksymbol") || printTicketConf.BREAKSYMBOL; 
-
+  
 
   const versionMeta = document.querySelector('meta[name="version"]');
   const version = versionMeta ? versionMeta.getAttribute('content') : '未知版本';
@@ -1090,7 +1603,13 @@ button.home-button:hover img {
           document.getElementById("storeTitle").innerText = storename+' ['+callername+']';    
       }else{
           document.getElementById("storeTitle").innerText = storename;
-      }      
+      }  
+      if(callername !== null){
+          document.getElementById("storeTitleP").innerText = storename+' ['+callername+']';    
+      }else{
+          document.getElementById("storeTitleP").innerText = storename;
+      }       
+      
 
       generateQRCode();
   }
@@ -1300,6 +1819,9 @@ button.home-button:hover img {
       }else if(bTwo === true) {
         card.classList.add('two');
         groupTitle.classList.add('two');
+      }else if(bThree === true) {
+        card.classList.add('three');
+        groupTitle.classList.add('three');        
       }else if(bMFive === true){
         card.classList.add('five');
         groupTitle.classList.add('five');
@@ -1471,15 +1993,19 @@ button.home-button:hover img {
         // 進行 URL 編碼（中文等特殊字元會被轉為百分比編碼）
         if(callername!== null){
             nurl=url+encodeURI(storename)+"&caller_name="+encodeURI(callername);
-        }        
+        
+        }   
+        let nnnurl = nurl+"&caller_id="+username;
         // 進行 URL 編碼（中文等特殊字元會被轉為百分比編碼）
-        qrcode.makeCode(nurl);
+        //qrcode.makeCode(nurl);
+        qrcode.makeCode(nnnurl);
         //document.getElementById("about-qrcode").
 
     }
 
   window.addEventListener("load",()=>{
     generateQRCode();
+    resetUI();
   });
   // 在網頁加載完成後自動呼叫 connectWebSocket
   window.onload = function () {
@@ -1495,7 +2021,8 @@ button.home-button:hover img {
           console.log(selectedValue);
           setSelectOption(selectedValue); // 若你需要同步執行自定函式
       }
-      initPage1();
+      
+
       ws = createWebSocket();
   };
       //-----------------------------------------------------------------------
@@ -1570,6 +2097,15 @@ button.home-button:hover img {
                     if (errorCode === '001' || errorCode === '002') {
                         console.log('驗證失敗');
                     }
+                }
+            }else if(ccmd && cmd.toLowerCase() === 'ping'){
+                const state = data[0];
+                if (state === 'Fail') {
+                  let errCode = data[1].split(/[,:]/);
+                  const errorCode = errCode[0];
+                  if (errorCode === '004') {
+                      console.log(data[1]);
+                  }                  
                 }
             }
           }else{
@@ -1680,6 +2216,15 @@ button.home-button:hover img {
                 if(data.uuid!== undefined){
                   initData.uuid = data.uuid;
                 }
+                if(bShowPage1 === true){
+                  initPage1();
+                }else{
+                  initPage2();
+                }
+                const logo2 = document.getElementById('loading');
+                if(!logo2.classList.contains('hidden')){
+                  logo2.classList.add('hidden');					
+                }                  
               } else {
                 const errorCode = data[1];
                 if (errorCode === '001' || errorCode === '002') {
@@ -1692,11 +2237,13 @@ button.home-button:hover img {
         ws.onopen = async () => {
             //console.log('[WebSocket 開啟成功]');
             
-            const txtPassword = '88888888';
+            //const txtPassword = '88888888';
+            const txtPassword = 'user_get_num';
             console.log(`WebSocket 開啟`);
-          // 1. 計算 SHA-256 雜湊值
-            const sha256Hash = CryptoJS.SHA256(txtPassword);
+            // 1. 計算 SHA-256 雜湊值
+            //const sha256Hash = CryptoJS.SHA256(txtPassword);
             // 2. 將雜湊值轉換為 Base64 編碼
+            const sha256Hash =txtPassword;
             base64Encoded = sha256Hash.toString(CryptoJS.enc.Base64);
             txtUsername = clientId;
             
@@ -2097,10 +2644,15 @@ button.home-button:hover img {
     //   btnhome.classList.remove('disabled');
     //   btnhome.disabled = false;
     // }
-    resetTimer();
+      resetTimer();
   }
 
   function resetTimer() {
+    if(bShowPage1 === false){
+      return;
+    }
+
+
     if(timer){
       clearTimeout(timer);
     }
@@ -2127,8 +2679,40 @@ button.home-button:hover img {
     }, popMsgInactivityTime);
   }  
 
+  function resetUI(){
+      const headP = document.getElementById("portraitHead");
+      const headL = document.getElementById("landscapeHead");
+      console.log(`新的寬度: ${window.innerWidth}px`);
+      console.log(`新的高度: ${window.innerHeight}px`);
+      if(window.innerWidth > window.innerHeight) {
+        if(headP){
+          if(!headP.classList.contains('hidden')){
+            headP.classList.add('hidden');
+          }
+        }
+        if(headL){
+          if(headL.classList.contains('hidden')){
+            headL.classList.remove('hidden');
+          }
+        }
+      }else{
+        if(headL){
+          if(!headL.classList.contains('hidden')){
+            headL.classList.add('hidden');
+          }
+        }
+        if(headP){
+          if(headP.classList.contains('hidden')){
+            headP.classList.remove('hidden');
+          }
+        }
+      }
+  }
+
+
   window.addEventListener("resize", () => {
       generateQRCode();
+      resetUI();
       //drawMultLangLabel();
   });
   //網路檢查.
