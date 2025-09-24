@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="version" content="1.0.7">
+<meta name="version" content="1.0.8">
 <script src="./js/qrcode.min.js"></script>
 <script src="./js/crypto-js.min.js"></script>
 <script src="./js/localforage.min.js"></script>
@@ -147,6 +147,7 @@
     height: var(--circle-size);
     /* 用 padding 讓文字左右保留空間 */
     padding: 0 18px;
+    flex-direction: column;
     /* 若希望整體置中，可用 margin: 0 auto; */
   } 
 
@@ -188,7 +189,15 @@
     white-space: nowrap;
     padding: 0 8px;
   } 
-
+  .badge .textSub {
+    position: relative;
+    z-index: 2;
+    color: #00433e;
+    font-size: clamp(20px,2vw, 2rem);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    padding: 0 8px;
+  } 
   /* .title-box {
     position: relative;
     width: 100%;
@@ -1165,12 +1174,19 @@ button.home-button:hover img {
     }  
       /* 文字在最上層 */
     .badge {
-      flex: 7 1 0%;
+      flex: 7 1 0%; 
     }      
     .badge .text {
-      font-size: 8vw;
+      font-size: clamp(20px, 6vw, 2.2rem);
       margin: auto;
+      white-space: normal;
+      text-align: center;
     } 
+    .badge .textSub {
+      font-size: clamp(18px, 4vw, 1.6rem);
+      margin: auto;
+      text-align: center;
+    }     
     .qrcode-title {
       font-size: clamp(3.5vh, 25px, 7vw);
       
@@ -1312,6 +1328,19 @@ button.home-button:hover img {
       margin: 1vh;
     }
   } 
+   @media (max-width: 250px) and (orientation: portrait){
+    .badge .text {
+      font-size: clamp(16px, 6vw, 1.8rem);
+      padding: 0;
+      margin-left: -2vw;
+      line-height: 1.1;
+    } 
+    .badge .textSub {
+      font-size: clamp(12px, 4vw, 1.6rem);
+      padding: 0;
+      margin-left: -2vw;
+    }     
+   }
 
 </style>
 </head>
@@ -1371,11 +1400,13 @@ button.home-button:hover img {
       </div>
       <div class="badge hidden" aria-hidden="false" id="portraitHead">
           <div class="text" id="storeTitleP"></div>
+          <div class="textSub" id="storeTitleP_sub"></div>
       </div>
     </div>
     <div class="center">
       <div class="badge" aria-hidden="false" id="landscapeHead">
           <div class="text" id="storeTitle"> </div>
+          <div class="textSub" id="storeTitle_sub"> </div>
       </div>      
       <div class = "page1 hidden">
         <div class = "qrcode-container" id="qrcodePage">
@@ -1599,15 +1630,12 @@ button.home-button:hover img {
   function showStorename(){
       //console.log('showStorename:'+storename);
       //document.getElementById("storeTitle").innerText = storename;
+      document.getElementById("storeTitle").innerText = storename;
+      document.getElementById("storeTitleP").innerText = storename;
+
       if(callername !== null){
-          document.getElementById("storeTitle").innerText = storename+' ['+callername+']';    
-      }else{
-          document.getElementById("storeTitle").innerText = storename;
-      }  
-      if(callername !== null){
-          document.getElementById("storeTitleP").innerText = storename+' ['+callername+']';    
-      }else{
-          document.getElementById("storeTitleP").innerText = storename;
+          document.getElementById("storeTitle_sub").innerText = callername;    
+          document.getElementById("storeTitleP_sub").innerText = callername;    
       }       
       
 
@@ -1622,6 +1650,7 @@ button.home-button:hover img {
     if(itemGroup === null || itemGroup.length === 0){
       console.log('nowUserGetNum:'+nowUserGetNum+' nowValue:'+nowValue);
       let cnt = Number(nowUserGetNum) - Number(nowValue);
+      if(cnt < 0) cnt=0;
       setWaitingNumber(0,cnt);
     }else{
       itemGroup.forEach((obj, idx)=>{
@@ -1986,6 +2015,7 @@ button.home-button:hover img {
         var qrcode = new QRCode(document.getElementById("about-qrcode"), {
             width: qWidth,
             height: qWidth,
+            correctLevel : QRCode.CorrectLevel.M
         });
         // var url = "https://line.me/R/oaMessage/@callmeback/?";
         let url = "https://liff.line.me/2003918297-NKaR4P9w/?shop_name=";
@@ -2098,7 +2128,7 @@ button.home-button:hover img {
                         console.log('驗證失敗');
                     }
                 }
-            }else if(ccmd && cmd.toLowerCase() === 'ping'){
+            }else if(cmd && cmd.toLowerCase() === 'ping'){
                 const state = data[0];
                 if (state === 'Fail') {
                   let errCode = data[1].split(/[,:]/);
@@ -2256,7 +2286,7 @@ button.home-button:hover img {
             setTimeout(() => {
               console.log("[WS] Reconnecting...");
               ws.reconnecting();
-            }, 2000); // 2 秒後重試
+            }, 3000); // 3 秒後重試
             
         };
         ws.onerror = (err) => {
@@ -2318,6 +2348,7 @@ button.home-button:hover img {
                         nowUserGetNum = data[2];
                         if(Number(nowValue)<= Number(nowUserGetNum)){
                             let less = Number(nowUserGetNum)-Number(nowValue);
+                            if(less<0) less=0;
                             nowLessValue = less.toString();
                         }else{
                             nowLessValue = 0;
