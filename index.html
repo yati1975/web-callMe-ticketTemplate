@@ -148,6 +148,8 @@
     /* 用 padding 讓文字左右保留空間 */
     padding: 0 18px;
     flex-direction: column;
+    justify-content: center;
+    line-height: 1;
     /* 若希望整體置中，可用 margin: 0 auto; */
   } 
 
@@ -225,10 +227,12 @@
   .header {
     position: relative;
     width: 100%;
-    height: auto;
+    /* height: auto; */
+    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   /* 背景 SVG */
@@ -554,7 +558,115 @@ button.home-button:hover img {
   font-size: 1.5rem;
   color: white;
 }
+.page3{
+  padding: 0;
+  height: auto;
+  gap: 0;
+  display: flex;
+  flex-direction: column;  
+} 
+.customer-container {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    width: 45vw;
+    height: 60vh;
+    max-width: 550px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    /* color: white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*height: auto;*/
+    min-height: 280px;
+}
 
+.customer-box {
+    display: flex;
+    position: relative;
+    width: 100%;
+    /* max-width: 300px; */
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
+    /* color: white; */
+    color: #00433e;
+    height: 100%;
+    /* min-height: 140px; */
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+.customer-pStore{
+    font-size: 3.2rem;
+    color: #00433e;
+    letter-spacing: 1vw;
+}
+.customer-pSection{
+    font-size: 2.8rem;
+    color: #14c4b7;
+    letter-spacing: 0.5vw;
+    margin: 1.5vh;
+}
+.customer-pNumber{
+    font-size: 15rem;
+    color: #eb3700;
+    line-height: 1;
+    letter-spacing: 1vw;    
+}
+.customer-box-info {
+    font-size: 2rem;
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    color: #00433e; 
+    letter-spacing: 0.5vw;
+}
+.customer-box-count {
+  color: #f66700;
+  font-weight: bold;
+  margin: 1vw;
+}
+.customer-box-note {
+  color: #3F7E7A;
+  font-size: 2.5rem;
+  letter-spacing: 0.5vw;
+  align-items: center;
+  display: none;
+  /* font-weight: bold; */
+  margin: 1vw;
+}
+.customer-container.expired{
+  background-color: #A4D7D3;
+}
+.customer-container.expired .customer-pStore{
+  color: #3F7E7A;
+}
+.customer-container.expired .customer-pSection{
+  color: #3F7E7A;
+}
+.customer-container.expired .customer-pNumber{
+  color: #3F7E7A;
+}
+.customer-container.expired .customer-box-info{
+  /*color: #3F7E7A;*/
+  display: none;
+}
+.customer-container.expired .customer-box-note{
+  display: unset;
+}
+
+.customer-title2 {
+  color: white;
+  font-size: 1.2rem;
+  margin: auto;
+}
 /* 背景遮罩 */
 .overlay2 {
     display: flex; /* 初始隱藏 */
@@ -744,6 +856,9 @@ button.home-button:hover img {
 .hidden{
   display: none;
 }
+.unvisible{
+  visibility: hidden;
+}
 
 @media (max-width: 1024px) {
   .page2{
@@ -770,14 +885,36 @@ button.home-button:hover img {
     min-width: 14vw;
     min-height: 14vw;
   }
+  .customer-container {
+    height: 50vh;
+  } 
+  .customer-pStore{
+    font-size: clamp(2.2rem, 40px, 12vw);
+  }
+  .customer-pSection{
+    font-size: clamp(2rem, 36px, 10vw);
+  }  
+  .customer-pNumber{
+    font-size: clamp(20vh, 100px, 45vw);
+  } 
+  .customer-title2 {
+    font-size: 3.5vh;
+  } 
 }
    /* 橫版設計 */
   @media (max-height: 450px) and (orientation: landscape){
     /* :root{ --circle-size: 60px; --overlap: -15px; } */
     :root{
       --circle-size: clamp(62px, 10vw, 18vh);
-    }    
-    .badge .text{ font-size: 3vw; letter-spacing: 1px; } 
+    }   
+    .badge {
+      justify-content: center;
+    } 
+    .badge .text
+    { font-size: 7vh; letter-spacing: 1px; } 
+    .badge .textSub{
+      font-size: 6vh;
+    }
     .resp{
       padding: 1vh;
       gap: 1vh;
@@ -812,9 +949,7 @@ button.home-button:hover img {
       height: auto;
       gap: 0;
     }       
-    #ver{
-      margin-top: 0vh;
-    }    
+   
     .modal{
       /* width: 100%; */
       height: 50vh;
@@ -877,14 +1012,42 @@ button.home-button:hover img {
     .footer img{
       transform: scale(0.75);
       transform-origin: center center;
-    }        
+    }   
+    #ver{
+      line-height: 1;
+      margin-top: -1vh;
+    }
+    .customer-container {
+      min-height: unset;
+      height: 50vh;
+    } 
+    .customer-pStore{
+      font-size: 7.5vh;
+    }
+    .customer-pSection{
+      font-size: 6vh;
+      margin: 0;
+    }  
+    .customer-pNumber{
+      font-size: clamp(20vh, 3.5rem, 45vw);
+    }      
+    .customer-box-info {
+      font-size: 6vh;
+    }  
+    .customer-box-note{
+      font-size: 7vh;
+    }
+
+    .customer-title2 {
+      font-size: 5.5vh;
+    }       
   }
    /* 橫版設計 */
   @media (max-height: 360px) and (orientation: landscape){
     /* :root{ --circle-size: 50px; --overlap: -15px; }*/
-    .badge .text{ font-size: 18px; letter-spacing: 1px; } 
+    .badge .text{ font-size: 7vh; letter-spacing: 1px; } 
     .resp{
-      padding: 1vh;
+      padding: 0vh;
       gap: 1vh;
     } 
     .qrcode-title {
@@ -912,9 +1075,7 @@ button.home-button:hover img {
       height: auto;
       gap: 0;
     }    
-    #ver{
-      margin-top: -2vh;
-    }    
+   
     .modal{
       width: 60%;
       height: 60%;
@@ -964,14 +1125,17 @@ button.home-button:hover img {
       margin: 0;
     }      
     .footer img{
-      transform: scale(0.8);
-      transform-origin: bottom center;
+      transform: scale(0.75);
+      /* transform-origin: bottom center; */
     }
+    .customer-title2 {
+      font-size: 5.5vh;
+    }     
   }
    /* 橫版設計 */
   @media (max-height: 250px) and (orientation: landscape){
     /* :root{ --circle-size: 50px; --overlap: -15px; }*/
-    .badge .text{ font-size: 18px; letter-spacing: 1px; } 
+    .badge .text{ font-size: 7vh; letter-spacing: 1px; } 
     .resp{
       padding: 1vh;
       gap: 1vh;
@@ -1094,9 +1258,34 @@ button.home-button:hover img {
       font-size: 16px;
     }      
     .footer img{
-      transform: scale(0.8);
+      transform: scale(0.75);
       transform-origin: bottom center;
     }
+   .customer-container {
+    min-height: unset;
+    height: 45vh;
+    padding: 5px
+   } 
+   .customer-pStore{
+    font-size: 6vh;
+   }
+   .customer-pSection{
+    font-size: 5.5vh;
+    margin: 0;
+   }  
+   .customer-pNumber{
+    font-size: 15vh;
+   }      
+   .customer-box-info {
+    font-size: 5.5vh;
+   }    
+  .customer-box-note{
+    font-size: 7vh;
+  }
+
+   .customer-title2 {
+    font-size: 5.5vh;
+   } 
   }  
    /* 橫版設計 */
   @media (max-width: 520px) and (orientation: landscape){
@@ -1184,15 +1373,18 @@ button.home-button:hover img {
       /* 文字在最上層 */
     .badge {
       flex: 7 1 0%; 
+      line-height: 1;
     }      
     .badge .text {
-      font-size: clamp(20px, 6vw, 2.2rem);
+      /*font-size: clamp(20px, 6vw, 2.2rem);*/
+      font-size: 6vw;
       margin: auto;
       white-space: normal;
       text-align: center;
     } 
     .badge .textSub {
-      font-size: clamp(18px, 4vw, 1.6rem);
+      /* font-size: clamp(18px, 4vw, 1.6rem); */
+      font-size: 4vw;
       margin: auto;
       text-align: center;
     }     
@@ -1270,20 +1462,48 @@ button.home-button:hover img {
       width: 90vw;
       height: 10vh;
       margin: 2vh 10px 2vh;
+      letter-spacing: 1vw;
+      max-width: unset;
+      max-height: unset;
     }
     .refresh {
       margin: 0.5vh 0 0 0;
       font-size: clamp(1.5rem, 3vh, 6vw);
-   }
+    }
+    .customer-container {
+      width: 90vw;
+      height: 50vh;
+      max-width: unset;
+    }
+    .customer-pStore{
+      font-size: clamp(2.6rem, 60px, 10vw);
+    }
+    .customer-pSection{
+      font-size: clamp(2.2rem, 50px, 8vw);
+    }  
+    .customer-pNumber{
+      font-size: clamp(20vh, 100px, 45vw);
+    } 
+    .customer-box-info{
+      font-size: clamp(2rem, 40px, 7vw);
+    }
+    .customer-box-note{
+      font-size: clamp(2.6rem, 60px, 10vw);
+    }
+
+    .customer-title2 {
+      font-size: clamp(1.5rem, 35px, 4vw);
+    }
+
    .modal {
     width: 90vw;
     height: 50vh;
    }
    .pStore{
-    font-size: clamp(2.8rem, 70px, 12vw);
+    font-size: clamp(2.6rem, 70px, 8vw);
    }
    .pSection{
-    font-size: clamp(2.2rem, 55px, 10vw);
+    font-size: clamp(2.2rem, 55px, 8vw);
    }  
    .pNumber{
     font-size: clamp(20vh, 100px, 45vw);
@@ -1440,10 +1660,23 @@ button.home-button:hover img {
       </div>
       <p class="refresh hidden">過號請重新取號</p>  
       </div>
+      <div class = "page3 hidden">
+        <div class="customer-container">
+            <div class="customer-pStore">您的號碼是</div>
+            <div class="customer-pSection" id="nowSection2">5~6人</div>
+            <div class="customer-pNumber" id="nowTakeNumber2">056</div>
+            <div class="customer-box-info ">
+              等待組數 <span class="customer-box-count" id="nowWaitNumber2">00</span> 組
+            </div>
+            <div class="customer-box-note">已過號</div>
+        </div>        
+        <div class="customer-title2">過號請重新取號</div>        
+      </div>
     </div>
     <div class="right">
     <div class="arrow-label hidden" onclick="goTakeTicketPage()" id="ticketPageButton" >現場取號</div> 
     <button class="confirm-button disabled hidden" id="btnConfirm" onclick="doTakeTicket()">確定</button>
+    <button class="confirm-button disabled hidden" id="btnReGet" onclick="doReGet()">重新取號</button>
     </div>
   </div>
 
@@ -1486,6 +1719,7 @@ button.home-button:hover img {
   let selectId=null;
   let nowValue=0;
   let nowUserGetNum = 0;
+  let nowGetNumItem = null;
   let itemGroup=null;
   let lastIsOnLineGet = true; //記錄上一個狀態.
   let txtUsername, base64Encoded;
@@ -1496,8 +1730,15 @@ button.home-button:hover img {
   let inactivityTime = 10000; // 10 秒
   let popMsgInactivityTime = 5000; // 5 秒
   let timer;
-  let nowGetNumItem = null;
   let ws = null;
+  let nowTimePeriod="";
+  let bCustomer = true;
+  let nowUserGetNumTime=null;      //使用者取號時間.
+  let nowUserGetNumValue=null;     //使用者取得排隊號碼.    
+  let nowGetNumItemValue =null;    //使用者取得排隊item.
+  let nowGetNumTurnValue =null;    //使用者取得排隊turn.
+  let nWaitTimeAvg=null;           //目前平均等候時間.sec.  
+  let nowGetNumExpired=false;      //檢查使用者取得的排隊號碼是否已過號.
   //let reconnecting = false;
   
   let initData={
@@ -1573,11 +1814,13 @@ button.home-button:hover img {
       clientId = username.toLocaleLowerCase();
       logourl = "https://storage.googleapis.com/callmeback-web/dispencer/images/"+username+"-logo.png";
   }  
-  let bShowPage1 = true;
-  if(bQrcode!==undefined && bQrcode === "0"){
-    bShowPage1= false;
+  let bShowPage1 = false;
+  if(bQrcode === "1"){
+    bShowPage1= true;
+    //note: print=1才是票機...其它條件皆為使用者.
+    userID = generateUserId();  //產生玩家ID.    
   }
-  userID = generateUserId();  //產生玩家ID.
+
 
   //print-ticket 增加這三行
   // let print = urlParams.get("print") || CONFIG.PRINT; // print=1 呼叫 local print server,print=0 不列印
@@ -1593,6 +1836,9 @@ button.home-button:hover img {
   let paper = urlParams.get("paper") || printTicketConf.PAPER; // 印表機紙張是 58mm或80mm
   let breaksymbol = urlParams.get("breaksymbol") || printTicketConf.BREAKSYMBOL; 
   
+  if((urlParams.get("paper"))&&(print==="1")){
+    bCustomer = false;
+  }
 
   const versionMeta = document.querySelector('meta[name="version"]');
   const version = versionMeta ? versionMeta.getAttribute('content') : '未知版本';
@@ -1620,9 +1866,111 @@ button.home-button:hover img {
     };
     testImg.src = logourl;
   }
+  if(bCustomer === true){
+    getDBata();
+  }else{
+    userID = generateUserId();  //產生玩家ID.
+  }
   
+  function getDBata () {
+    try {
+        const db = localforage.createInstance({
+            name: 'callMe2',
+            storeName: 'data'
+        });
+        db.getItem('UserID').then((data)=>{
+            if(data){
+                userID=data;
+            }else{
+                userID = generateUserId();  //產生玩家ID.
+            }
+        });
+        if(clientId !== null){
+            db.getItem(clientId).then((data)=>{
+                console.log('localforage:'+clientId+' data:'+JSON.stringify(data));
+                if(data){
+                    if((data.timestamp !== undefined) &&(data.timestamp !== null)){
+                        nowUserGetNumTime = data.timestamp;
+                    }
+                    if((data.getnum !== undefined) &&(data.getnum !== null)){            
+                        nowUserGetNumValue = data.getnum;
+                    }
+                    if((data.itemid !== undefined) &&(data.itemid !== null)){            
+                        nowGetNumItemValue = data.itemid;
+                    }         
+                    if((data.turn !== undefined) &&(data.turn !== null)){            
+                        nowGetNumTurnValue = data.turn;
+                    }                               
+                    if((data.waitavg !== undefined) &&(data.waitavg !== null)){ 
+                        nWaitTimeAvg = data.waitavg;
+                    }
+                    //有取號記錄.
+                    //showNowGetNumber();
+                    //showGetNumTime();
+                    console.log('nowUserGetNumTime:'+nowUserGetNumTime);
+                    console.log('nowUserGetNumValue:'+nowUserGetNumValue);
+                    console.log('nowGetNumItemValue:'+nowGetNumItemValue);
+                    console.log('nowGetNumTurnValue:'+nowGetNumTurnValue);
+                    console.log('nWaitTimeAvg:'+nWaitTimeAvg);
+                    //let tenM = defTime;
+                    if(nowUserGetNumTime !== null){
+                        //檢查時間戳記, 顯示是否重新取號.
+                        let nt = new Date();
+                        let less = nt.getTime() - nowUserGetNumTime.getTime();
+                        //檢查是否跨日且超過凌晨4點.
+                        console.log('less:'+less);
+                        if(isCrossDayAndAfter4AM(nowUserGetNumTime, nt) === true){
+                            console.log('isCrossDayAndAfter4AM==true');
+                            //overyournumber();
+                            clearData();
+                        // }else{
+                        //     getNumber();
+                        //     if(less > tenM){
+                        //         console.log('大于10分鐘:'+less);
+                        //         //大于10分鐘.
+                        //         overyournumber();
+                        //     }else{
+                        //         startEvent(nowUserGetNumTime);
+                        //     }
+                        }
+                    }
+                }
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
+  }
 
-  
+
+  async function clearData() {
+      try {
+          const db = localforage.createInstance({
+              name: 'callMe2',
+              storeName: 'data'
+          });        
+          let getNumData = {
+              timestamp: null,
+              getnum:null
+          };
+          db.setItem(clientId, getNumData);
+          console.log('該資料已清除');
+      } catch (err) {
+          console.error('清除資料失敗:', err);
+      }
+      nowUserGetNumTime = null;
+      nowUserGetNum = null;
+      nowWaitTimeValue = 0;
+  }
+  function isCrossDayAndAfter4AM(startTime, now) {
+      // 判斷是否跨日
+      const isCrossDay = now.toDateString() !== startTime.toDateString();
+      // 判斷是否超過凌晨4點
+      const fourAM = new Date();
+      fourAM.setHours(4, 0, 0, 0); // 設定為當天的凌晨4點
+      const isAfter4AM = now.getTime() >= fourAM.getTime();
+      return isCrossDay && isAfter4AM;
+  }
 
   //todo: 暫時移除語言選擇,直到提供語系翻譯.
   // const earthbtn = document.getElementById('earth'); //reget.
@@ -1657,6 +2005,13 @@ button.home-button:hover img {
       if(callername !== null){
           document.getElementById("storeTitle_sub").innerText = callername;    
           document.getElementById("storeTitleP_sub").innerText = callername;    
+      }else{
+          if(!document.getElementById("storeTitle_sub").classList.contains('hidden')){
+            document.getElementById("storeTitle_sub").classList.add('hidden');
+          }
+          if(!document.getElementById("storeTitleP_sub").classList.contains('hidden')){
+            document.getElementById("storeTitleP_sub").classList.add('hidden');
+          }
       }       
       
 
@@ -1680,7 +2035,58 @@ button.home-button:hover img {
         setWaitingNumber(idx,cnt);
       });
     }
+    if((nowpage === 3)&&(nowGetNumExpired === false)){
+      let objReturn = checkGetNumberExpired();
+      if(objReturn.cnt > 0){
+        let page3Count = document.getElementById('nowWaitNumber2');
+        page3Count.textContent = objReturn.cnt ;
+      }else{
+        customerExpired();   
+        nowGetNumExpired = true;           
+      }
+    }
   }
+  function checkGetNumberExpired(){
+    //計算各組等待組數.
+    if(itemGroup === null || itemGroup.length === 0){
+      console.log('nowUserGetNumValue:'+nowUserGetNumValue+' nowValue:'+nowValue);
+      let cnt = Number(nowUserGetNumValue) - Number(nowValue);
+      if(cnt < 0) {
+        cnt=0;
+        return {cnt:0,bExpired:true};
+      }else{
+        return {cnt:cnt,bExpired:false};
+      }
+    }else{
+      let bExpired=false;
+      console.log('nowGetNumItemValue:'+nowGetNumItemValue);
+      if(nowGetNumItemValue!==null){
+        console.log('itemGroup'+JSON.stringify(itemGroup));
+        let cid = itemGroup[Number(nowGetNumItemValue)].findIndex(item => item.num === nowUserGetNumValue);
+
+        if(cid === -1){
+          //已移除或取消.
+          bExpired = true;
+        }else{
+          console.log("itemGroup["+nowGetNumItemValue+"]["+cid+"].data.turn="+itemGroup[Number(nowGetNumItemValue)][cid].data.turn+" nowGetNumTurnValue="+nowGetNumTurnValue );
+          if(itemGroup[Number(nowGetNumItemValue)][cid].data.turn !== nowGetNumTurnValue){
+            
+            bExpired = true;
+          }
+        }
+      }
+      if(bExpired === false){
+        let cnt = 0;
+        itemGroup[Number(nowGetNumItemValue)].forEach(obj=>{
+            cnt++;
+        });
+        return {cnt:cnt,bExpired:false};
+      }else{
+        return {cnt:0,bExpired:true};
+      }
+    }
+  }
+
   function setNumItemData(itemNameList,inData, blogin){
     console.log('setNumItemData');
     itemGroup = [];
@@ -1692,7 +2098,8 @@ button.home-button:hover img {
       let numItemData = inData[key];
       if(numItemData.state === "waiting"){
         //console.log(numItemData);
-        sub=itemGroup[Number(numItemData.get_num_item_id)].push(Number(key));
+        //sub=itemGroup[Number(numItemData.get_num_item_id)].push(Number(key));
+        itemGroup[Number(numItemData.get_num_item_id)].push({num: Number(key), data: numItemData});
         
       }
     }
@@ -1773,20 +2180,12 @@ button.home-button:hover img {
         }
       }else{
         document.getElementById('nowSection').textContent = "";
-        let cnt = nowGetNumItem - nowValue;
+        let cnt = getnum - nowValue;
         if(count){
           count.textContent = cnt;
         }
       }
       closePopMsgTimer();
-      // document.getElementById('nowTakeNumber').textContent = itemobj.num;
-      // const now = new Date();
-      // document.getElementById("nowTimestamp").innerText = now.toLocaleString('zh-TW', {
-      //     year: 'numeric', month: 'long', day: 'numeric',
-      //     hour: 'numeric', minute: 'numeric', second: 'numeric',
-      //     hour12: false
-      // });
-      //document.getElementById('nowTimestamp').textContent = new Date();
   }
   function removeCardSelect(){
     // 先移除其他卡片的選取狀態
@@ -1846,6 +2245,31 @@ button.home-button:hover img {
     }
     removeCardSelect();
     resetTimer();
+  }
+  function openCustomer(getnum, itemid, cnt, bExpired){
+
+    console.log('openCustomer:'+getnum+ ' '+itemid);
+    let paddedNumber = String(getnum).padStart(3,"0");
+    document.getElementById('nowTakeNumber2').textContent = paddedNumber;
+    let count = document.getElementById('nowWaitNumber2');
+
+    if(itemid !== ""){
+      document.getElementById('nowSection2').textContent = initData.get_num_item_names[Number(itemid)];
+      //let cnt = itemGroup[Number(itemid)].length;
+      if(count){
+        count.textContent = cnt;
+      }
+    }else{
+      document.getElementById('nowSection2').textContent = "";
+      // let cnt = getnum - nowValue;
+      // if(cnt<=0)cnt=0;
+      if(count){
+        count.textContent = cnt;
+      }
+    }
+    closePopMsgTimer();
+    initPage3(bExpired);
+    console.log('bExpired:'+bExpired);
   }
   function clearSection(){
     const groupContainer = document.getElementById("groupContainer");
@@ -2296,7 +2720,7 @@ button.home-button:hover img {
                     //         clearGetNumTime();
                     //         clearData();
                     //         nowUserGetNumTime=null;
-                    //         nowUserGetNumValue = null;
+                    //         nowUserGetNum = null;
                     //         nowWaitTimeValue = null;
                     //         lockUserGetNum = false;
                     //         screenInit();                        
@@ -2324,7 +2748,15 @@ button.home-button:hover img {
                 if(bShowPage1 === true){
                   initPage1();
                 }else{
-                  initPage2();
+                  if(bCustomer === true && nowUserGetNumValue !== null){
+                    //todo:這段已到號判斷有問題.待修改.
+                    
+                    let objReturn = checkGetNumberExpired();
+                    console.log('objReturn:'+JSON.stringify(objReturn));
+                    openCustomer(nowUserGetNumValue,nowGetNumItemValue,objReturn.cnt,objReturn.bExpired);
+                  }else{
+                    initPage2();
+                  }
                 }
                 const logo2 = document.getElementById('loading');
                 if(!logo2.classList.contains('hidden')){
@@ -2402,7 +2834,8 @@ button.home-button:hover img {
                                 }
                                 let section = obj2.get_num_item_id;
 
-                                let pidx = itemGroup[Number(section)].indexOf(Number(data[2]));
+                                //let pidx = itemGroup[Number(section)].indexOf(Number(data[2]));
+                                let pidx = itemGroup[Number(section)].findIndex(item => item.num === Number(data[2]));
                                 if(pidx!== -1){
                                   itemGroup[Number(section)].splice(pidx,1); 
                                 }
@@ -2463,12 +2896,19 @@ button.home-button:hover img {
                             for_customer: obj.for_customer || false,
                             get_from_web: obj.get_from_web || false,
                             get_num_item_id: obj.get_num_item_id || "",
+                            turn: obj.turn || "",
                             state: "waiting"
                           };
                           initData.get_num_item_data[obj.get_num] = obj2;
 
-                          if(itemGroup[Number(obj.get_num_item_id)].indexOf(obj.get_num) === -1){
-                             itemGroup[Number(obj.get_num_item_id)].push(obj.get_num); 
+                          //if(itemGroup[Number(obj.get_num_item_id)].indexOf(obj.get_num) === -1){
+                          //   itemGroup[Number(obj.get_num_item_id)].push(obj.get_num); 
+                          //}
+                          let cid = itemGroup[Number(obj.get_num_item_id)].findIndex(item => item.num === obj.get_num);
+                          if(cid === -1){
+                            itemGroup[Number(obj.get_num_item_id)].push({num:Number(obj.get_num),data:obj2});
+                          }else{
+                            itemGroup[Number(obj.get_num_item_id)][cid].data = obj2;
                           }
                         }  
                         showNowGetNumber();
@@ -2476,8 +2916,41 @@ button.home-button:hover img {
                         //     openModal(obj.get_num, obj.get_num_item_id);
                         // }
                         if(bClickedAddButton === true){
+                          nowGetNumItemValue = Number(obj.get_num_item_id);
+                          nowUserGetNumValue = Number(obj.get_num);
+                          nowGetNumTurnValue = obj.turn;
                           //removeCardSelect();
-                          openModal(obj.get_num, obj.get_num_item_id);
+                          if(bCustomer === false){
+                            openModal(obj.get_num, obj.get_num_item_id);
+                          }else{
+                            try {
+                              const nowTime = new Date();
+                              const db = localforage.createInstance({
+                                name: 'callMe2',
+                                storeName: 'data'
+                              });
+                              db.setItem('UserID',userID);
+                              let getNumData = {
+                                  timestamp: nowTime,
+                                  getnum:obj.get_num,
+                                  itemid:obj.get_num_item_id,
+                                  turn: obj.turn,
+                                  waitavg:0
+                              };
+                              nowUserGetNumTime = nowTime;
+                              nowUserGetNumValue = obj.get_num;
+                              nowUserGetNumTime = obj.get_num_item_id;
+                              nWaitTimeAvg = 0;
+
+                              db.setItem(clientId, getNumData);
+                            } catch (error) {
+                              console.error(error);
+                            }
+                            nowGetNumExpired =false;
+                            let objReturn = checkGetNumberExpired();
+                            console.log("objReturn:"+JSON.stringify(objReturn));
+                            openCustomer(obj.get_num, obj.get_num_item_id,objReturn.cnt,objReturn.bExpired);
+                          }
                           bClickedAddButton = false; 
                         }
                         if(obj.get_num_item_id){
@@ -2535,7 +3008,7 @@ button.home-button:hover img {
                             if(objdata!==undefined){
                               initData.get_num_item_data[obj.cancel_num.toString()].state = "removed";
                               let sectionid = initData.get_num_item_data[obj.cancel_num.toString()].get_num_item_id;
-                              let cidx = itemGroup[Number(sectionid)].indexOf(obj.cancel_num);
+                              let cidx = itemGroup[Number(sectionid)].findIndex(item => item.num === obj.cancel_num);
                               if(cidx !== -1){
                                 itemGroup[Number(sectionid)].splice(cidx,1);  //移除取消號.
                               }
@@ -2551,7 +3024,8 @@ button.home-button:hover img {
                           if(objdata!==undefined){
                             initData.get_num_item_data[obj.remove_num.toString()].state = "removed";
                             let sectionid = initData.get_num_item_data[obj.remove_num.toString()].get_num_item_id;
-                            let cidx = itemGroup[Number(sectionid)].indexOf(obj.remove_num);
+                            //let cidx = itemGroup[Number(sectionid)].indexOf(obj.remove_num);
+                            let cidx = itemGroup[Number(sectionid)].findIndex(item => item.num === obj.remove_num);
                             if(cidx !== -1){
                               itemGroup[Number(sectionid)].splice(cidx,1);  //移除取消號.
                             }
@@ -2589,13 +3063,21 @@ button.home-button:hover img {
                         for_customer: obj.for_customer || false,
                         get_from_web: obj.get_from_web || false,
                         get_num_item_id: obj.get_num_item_id,
+                        turn: obj.turn || "",
                         state: "waiting"
                       };
-                      initData.get_num_item_data[obj.get_num] = obj2;
+                      initData.get_num_item_data[obj.curr_num] = obj2;
 
-                      if(itemGroup[Number(obj.get_num_item_id)].indexOf(obj.get_num) === -1){
-                          itemGroup[Number(obj.get_num_item_id)].push(obj.get_num); 
+                      // if(itemGroup[Number(obj.get_num_item_id)].indexOf(obj.get_num) === -1){
+                      //     itemGroup[Number(obj.get_num_item_id)].push(obj.get_num); 
+                      // }
+                      let cidx = itemGroup[Number(obj.get_num_item_id)].findIndex(item => item.num === obj.curr_num);
+                      if(cidx === -1){
+                        itemGroup[Number(obj.get_num_item_id)].push({num:Number(obj.curr_num),data:obj2});
+                      }else{
+                        itemGroup[Number(obj.get_num_item_id)][cidx].data=obj2;
                       }
+                      
                     } 
                     showNowGetNumber();
                 }else if((obj.caller_id === clientId)&&(obj.action === 'cancel_get_num')){
@@ -2607,7 +3089,8 @@ button.home-button:hover img {
                         if(objdata!==undefined){
                           initData.get_num_item_data[obj.cancel_num.toString()].state = "removed";
                           let sectionid = initData.get_num_item_data[obj.cancel_num.toString()].get_num_item_id;
-                          let cidx = itemGroup[Number(sectionid)].indexOf(obj.cancel_num);
+                          let cidx = itemGroup[Number(sectionid)].findIndex(item => item.num === obj.cancel_num);
+                          //let cidx = itemGroup[Number(sectionid)].indexOf(obj.cancel_num);
                           if(cidx !== -1){
                             itemGroup[Number(sectionid)].splice(cidx,1);  //移除取消號.
                           }
@@ -2789,6 +3272,20 @@ button.home-button:hover img {
         c.classList.remove('hidden');
       }
     });
+    document.querySelectorAll('.page3').forEach(c => {
+      if(!c.classList.contains('hidden')){
+        c.classList.add('hidden');
+      }
+    });
+    const btn3 = document.getElementById("btnReGet");
+    if(!btn3.classList.contains('hidden')){
+      btn3.classList.add('hidden');
+    }
+    if(!btn3.classList.contains('disabled')){
+      btn3.classList.add('disabled');
+      btn3.disabled = true;
+    }     
+
     // const btnhome = document.getElementById("btnhome");
     // if(btnhome.classList.contains('hidden')){
     //   btnhome.classList.remove('hidden');
@@ -2798,6 +3295,106 @@ button.home-button:hover img {
     //   btnhome.disabled = false;
     // }
       resetTimer();
+  }
+  function initPage3(bExpired){
+    nowpage = 3;
+    document.querySelectorAll('.page1').forEach(c => {
+      if(!c.classList.contains('hidden')){
+        c.classList.add('hidden');
+      }
+    });    
+    const qrcodepage = document.getElementById("qrcodePage");
+    const btn1 = document.getElementById("ticketPageButton");
+    if(!qrcodePage.classList.contains('hidden')){
+      qrcodePage.classList.add("hidden");
+    }
+    if(!btn1.classList.contains('hidden')){
+      btn1.classList.add("hidden");
+    }
+    if(!btn1.classList.contains('disabled')){
+      btn1.classList.add("disabled");
+      btn1.disabled = true;
+    }
+
+    document.querySelectorAll('.page2').forEach(c => {
+      if(!c.classList.contains('hidden')){
+        c.classList.add('hidden');
+      }
+    });
+    const groupcards = document.getElementById("groupContainer");
+    const btn = document.getElementById("btnConfirm");
+    if(!groupcards.classList.contains('hidden')){
+      groupcards.classList.add('hidden');
+    }
+    if(!btn.classList.contains('hidden')){
+      btn.classList.add('hidden');
+    }
+    if(!btn.classList.contains('disabled')){
+      btn.classList.add('disabled');
+      btn.disabled = true;
+    }
+
+    document.querySelectorAll('.refresh').forEach(c => {
+      if(!c.classList.contains('hidden')){
+        c.classList.add('hidden');
+      }
+    });
+    document.querySelectorAll('.page3').forEach(c => {
+      if(c.classList.contains('hidden')){
+        c.classList.remove('hidden');
+      }
+    });
+
+    const btn3 = document.getElementById("btnReGet");
+    if(btn3.classList.contains('hidden')){
+      btn3.classList.remove('hidden');
+    }
+    if(!btn3.classList.contains('unvisible')){
+      btn3.classList.add('unvisible');
+    }
+    if(!btn3.classList.contains('disabled')){
+      btn3.classList.add('disabled');
+      btn3.disabled = true;
+    }     
+
+    if(!bExpired){
+      document.querySelectorAll('.customer-container').forEach(c => {
+        if(c.classList.contains('expired')){
+          c.classList.remove('expired');
+        }
+      });
+    }else{
+      customerExpired();
+    }
+  }
+
+  
+  function customerExpired(){
+    document.querySelectorAll('.customer-container').forEach(c => {
+      if(!c.classList.contains('expired')){
+        c.classList.add('expired');
+      }
+    });    
+    const btn = document.getElementById("btnReGet");
+    if(btn.classList.contains('hidden')){
+      btn.classList.remove('hidden');
+    }
+    if(btn.classList.contains('disabled')){
+      btn.classList.remove('disabled');
+      btn.disabled = false;
+    }    
+    if(btn.classList.contains('unvisible')){
+      btn.classList.remove('unvisible');
+    }    
+  }
+
+  function doReGet(){
+    clearData();
+    nowUserGetNumTime=null;
+    nowUserGetNum = null;
+    nowWaitTimeValue = null;
+
+    initPage2();
   }
 
   function resetTimer() {
